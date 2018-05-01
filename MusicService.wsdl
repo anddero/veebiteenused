@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:tns="http://www.ttu.ee/idu0075/2018/ws/164718/music"
+    targetNamespace="http://www.ttu.ee/idu0075/2018/ws/164718/music">
+    <wsdl:types>
+        <xs:schema  targetNamespace="http://www.ttu.ee/idu0075/2018/ws/164718/music"
+                    elementFormDefault="qualified">
+            <xs:simpleType name="formatType">
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="mp3|wav|ogg"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:complexType name ="songType">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:integer"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="author" type="xs:string"/>
+                    <xs:element name="lengthSeconds" type="xs:integer"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name ="diskSongType">
+                <xs:sequence>
+                    <xs:element name="song" type="tns:songType"/>
+                    <xs:element name="startTimeSeconds" type="xs:integer"/>
+                    <xs:element name="format" type="tns:formatType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name ="diskSongListType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="diskSong" type="tns:diskSongType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name ="diskType">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:integer"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="author" type="xs:string"/>
+                    <xs:element name="lengthSeconds" type="xs:integer"/>
+                    <xs:element name="diskSongList" type="tns:diskSongListType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="getSongRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="token" type="xs:string"/>
+                        <xs:element name="id" type="xs:integer"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getSongResponse" type="tns:songType"/>
+            <xs:element name="addSongRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="requestCode" type="xs:integer"/>
+                        <xs:element name="token" type="xs:string"/>
+                        <xs:element name="name" type="xs:string"/>
+                        <xs:element name="author" type="xs:string"/>
+                        <xs:element name="lengthSeconds" type="xs:integer"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addSongResponse" type="tns:songType"/>
+            <xs:element name="getSongListRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="token" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getSongListResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" maxOccurs="unbounded" name="song" type="tns:songType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getDiskRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="token" type="xs:string"/>
+                        <xs:element name="id" type="xs:integer"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getDiskResponse" type="tns:diskType"/>
+            <xs:element name="addDiskRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="requestCode" type="xs:string"/>
+                        <xs:element name="token" type="xs:string"/>
+                        <xs:element name="name" type="xs:string"/>
+                        <xs:element name="author" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addDiskResponse" type="tns:diskType"/>
+            <xs:element name="getDiskListRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="token" type="xs:string"/>
+                        <xs:element minOccurs="0" name="minLengthSeconds" type="xs:integer"/>
+                        <xs:element minOccurs="0" name="maxLengthSeconds" type="xs:integer"/>
+                        <xs:element minOccurs="0" name="minSongCount" type="xs:integer"/>
+                        <xs:element minOccurs="0" name="maxSongCount" type="xs:integer"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getDiskListResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" maxOccurs="unbounded" name="disk" type="tns:diskType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getDiskSongListRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="token" type="xs:string"/>
+                        <xs:element name="diskId" type="xs:integer"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getDiskSongListResponse" type="tns:diskSongListType"/>
+            <xs:element name="addDiskSongRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="requestCode" type="xs:integer"/>
+                        <xs:element name="token" type="xs:string"/>
+                        <xs:element name="diskId" type="xs:integer"/>
+                        <xs:element name="songId" type="xs:integer"/>
+                        <xs:element name="startTimeSeconds" type="xs:integer"/>
+                        <xs:element name="format" type="tns:formatType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addDiskSongResponse" type="tns:diskSongType"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getSongMessageRequest">
+        <wsdl:part name="parameter" element="tns:getSongRequest"/>
+    </wsdl:message>
+    <wsdl:message name="getSongMessageResponse">
+        <wsdl:part name="parameter" element="tns:getSongResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addSongMessageRequest">
+        <wsdl:part name="parameter" element="tns:addSongRequest"/>
+    </wsdl:message>
+    <wsdl:message name="addSongMessageResponse">
+        <wsdl:part name="parameter" element="tns:addSongResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getSongListMessageRequest">
+        <wsdl:part name="parameter" element="tns:getSongListRequest"/>
+    </wsdl:message>
+    <wsdl:message name="getSongListMessageResponse">
+        <wsdl:part name="parameter" element="tns:getSongListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getDiskMessageRequest">
+        <wsdl:part name="parameter" element="tns:getDiskRequest"/>
+    </wsdl:message>
+    <wsdl:message name="getDiskMessageResponse">
+        <wsdl:part name="parameter" element="tns:getDiskResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addDiskMessageRequest">
+        <wsdl:part name="parameter" element="tns:addDiskRequest"/>
+    </wsdl:message>
+    <wsdl:message name="addDiskMessageResponse">
+        <wsdl:part name="parameter" element="tns:addDiskResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getDiskListMessageRequest">
+        <wsdl:part name="parameter" element="tns:getDiskListRequest"/>
+    </wsdl:message>
+    <wsdl:message name="getDiskListMessageResponse">
+        <wsdl:part name="parameter" element="tns:getDiskListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getDiskSongListMessageRequest">
+        <wsdl:part name="parameter" element="tns:getDiskSongListRequest"/>
+    </wsdl:message>
+    <wsdl:message name="getDiskSongListMessageResponse">
+        <wsdl:part name="parameter" element="tns:getDiskSongListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="addDiskSongMessageRequest">
+        <wsdl:part name="parameter" element="tns:addDiskSongRequest"/>
+    </wsdl:message>
+    <wsdl:message name="addDiskSongMessageResponse">
+        <wsdl:part name="parameter" element="tns:addDiskSongResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="MusicPortType">
+        <wsdl:operation name="getSong">
+            <wsdl:input message="tns:getSongMessageRequest"/>
+            <wsdl:output message="tns:getSongMessageResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addSong">
+            <wsdl:input message="tns:addSongMessageRequest"/>
+            <wsdl:output message="tns:addSongMessageResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getSongList">
+            <wsdl:input message="tns:getSongListMessageRequest"/>
+            <wsdl:output message="tns:getSongListMessageResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getDisk">
+            <wsdl:input message="tns:getDiskMessageRequest"/>
+            <wsdl:output message="tns:getDiskMessageResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addDisk">
+            <wsdl:input message="tns:addDiskMessageRequest"/>
+            <wsdl:output message="tns:addDiskMessageResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getDiskList">
+            <wsdl:input message="tns:getDiskListMessageRequest"/>
+            <wsdl:output message="tns:getDiskListMessageResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getDiskSongList">
+            <wsdl:input message="tns:getDiskSongListMessageRequest"/>
+            <wsdl:output message="tns:getInvoiceProductListMessageResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="addDiskSong">
+            <wsdl:input message="tns:addDiskSongMessageRequest"/>
+            <wsdl:output message="tns:addDiskSongMessageResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="MusicBinding" type="tns:MusicPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getSong">
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addSong">
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getSongList">
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>    
+        <wsdl:operation name="getDisk">
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addDisk">
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getDiskList">
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>    
+        <wsdl:operation name="getDiskSongList">
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="addDiskSong">
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="MusicService">
+        <wsdl:port name="MusicPort" binding="tns:MusicBinding">
+            <soap:address location="Empty"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
