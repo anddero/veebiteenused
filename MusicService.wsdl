@@ -91,7 +91,7 @@
             <xs:element name="addDiskRequest">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="requestCode" type="xs:string"/>
+                        <xs:element name="requestCode" type="xs:integer"/>
                         <xs:element name="token" type="xs:string"/>
                         <xs:element name="name" type="xs:string"/>
                         <xs:element name="author" type="xs:string"/>
