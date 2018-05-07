@@ -173,6 +173,12 @@ public class MusicWebService {
                 return null;
             }
             
+            if (!"mp3".equalsIgnoreCase(addDiskSongRequest.getFormat())
+                    && !"wav".equalsIgnoreCase(addDiskSongRequest.getFormat())
+                    && !"ogg".equalsIgnoreCase(addDiskSongRequest.getFormat())) {
+                return null;
+            }
+            
             DiskSongType newDiskSong = new DiskSongType();
             newDiskSong.setSong(optionalSong.get());
             newDiskSong.setFormat(addDiskSongRequest.getFormat());
