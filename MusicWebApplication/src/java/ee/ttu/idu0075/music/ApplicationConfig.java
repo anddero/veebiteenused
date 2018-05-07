@@ -18,6 +18,12 @@ public class ApplicationConfig extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
+        try {
+            Class jsonProvider = Class.forName("org.glassfish.jersey.jackson.JacksonFeature");
+            resources.add(jsonProvider);
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(getClass().getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         addRestResourceClasses(resources);
         return resources;
     }
