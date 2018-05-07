@@ -38,11 +38,11 @@ import javax.jws.WebService;
         wsdlLocation = "WEB-INF/wsdl/MusicWebService/MusicService.wsdl")
 public class MusicWebService {
     private static final String PASSWORD = "salajane";
-    private static final List<SongType> songs = new ArrayList<>();
-    private static final List<DiskType> disks = new ArrayList<>();
-    private static final HashMap<BigInteger, SongType> addSongRequests = new HashMap<>();
-    private static final HashMap<BigInteger, DiskType> addDiskRequests = new HashMap<>();
-    private static final HashMap<BigInteger, DiskSongType> addDiskSongRequests = new HashMap<>();
+    private static final List<SongType> SONGS = new ArrayList<>();
+    private static final List<DiskType> DISKS = new ArrayList<>();
+    private static final HashMap<BigInteger, SongType> ADD_SONG_REQUESTS = new HashMap<>();
+    private static final HashMap<BigInteger, DiskType> ADD_DISK_REQUESTS = new HashMap<>();
+    private static final HashMap<BigInteger, DiskSongType> ADD_DISK_SONG_REQUESTS = new HashMap<>();
     private static BigInteger autoId = BigInteger.ZERO;
 
     public SongType getSong(GetSongRequest getSongRequest) {
@@ -50,7 +50,7 @@ public class MusicWebService {
             return null;
         }
         
-        return songs.stream()
+        return SONGS.stream()
                 .filter(s -> getSongRequest.getId().equals(s.getId()))
                 .findAny()
                 .orElse(null);
@@ -61,18 +61,18 @@ public class MusicWebService {
             return null;
         }
         
-        if (!addSongRequests.containsKey(addSongRequest.getRequestCode())) {
+        if (!ADD_SONG_REQUESTS.containsKey(addSongRequest.getRequestCode())) {
             SongType newSong = new SongType();
             newSong.setId(autoId);
             newSong.setName(addSongRequest.getName());
             newSong.setAuthor(addSongRequest.getAuthor());
             newSong.setLengthSeconds(addSongRequest.getLengthSeconds());
-            songs.add(newSong);
-            addSongRequests.put(addSongRequest.getRequestCode(), newSong);
+            SONGS.add(newSong);
+            ADD_SONG_REQUESTS.put(addSongRequest.getRequestCode(), newSong);
             autoId = autoId.add(BigInteger.ONE);
         }
         
-        return addSongRequests.get(addSongRequest.getRequestCode());
+        return ADD_SONG_REQUESTS.get(addSongRequest.getRequestCode());
     }
 
     public GetSongListResponse getSongList(GetSongListRequest getSongListRequest) {
@@ -81,7 +81,7 @@ public class MusicWebService {
         }
         
         GetSongListResponse response = new GetSongListResponse();
-        response.getSong().addAll(songs);
+        response.getSong().addAll(SONGS);
         return response;
     }
 
@@ -90,7 +90,7 @@ public class MusicWebService {
             return null;
         }
         
-        return disks.stream()
+        return DISKS.stream()
                 .filter(disk -> getDiskRequest.getId().equals(disk.getId()))
                 .findAny()
                 .orElse(null);
@@ -101,19 +101,19 @@ public class MusicWebService {
             return null;
         }
         
-        if (!addDiskRequests.containsKey(addDiskRequest.getRequestCode())) {
+        if (!ADD_DISK_REQUESTS.containsKey(addDiskRequest.getRequestCode())) {
             DiskType newDisk = new DiskType();
             newDisk.setId(autoId);
             newDisk.setName(addDiskRequest.getName());
             newDisk.setAuthor(addDiskRequest.getAuthor());
-            newDisk.setDiskSongList(new DiskSongListType());
             newDisk.setLengthSeconds(BigInteger.ZERO);
-            disks.add(newDisk);
-            addDiskRequests.put(addDiskRequest.getRequestCode(), newDisk);
+            newDisk.setDiskSongList(new DiskSongListType());
+            DISKS.add(newDisk);
+            ADD_DISK_REQUESTS.put(addDiskRequest.getRequestCode(), newDisk);
             autoId = autoId.add(BigInteger.ONE);
         }
         
-        return addDiskRequests.get(addDiskRequest.getRequestCode());
+        return ADD_DISK_REQUESTS.get(addDiskRequest.getRequestCode());
     }
 
     public GetDiskListResponse getDiskList(GetDiskListRequest request) {
@@ -122,7 +122,7 @@ public class MusicWebService {
         }
         
         GetDiskListResponse response = new GetDiskListResponse();
-        response.getDisk().addAll(disks.stream()
+        response.getDisk().addAll(DISKS.stream()
                 .filter(disk -> request.getMaxLengthSeconds() == null
                         || request.getMaxLengthSeconds().compareTo(disk.getLengthSeconds()) >= 0)
                 .filter(disk -> request.getMinLengthSeconds() == null
@@ -140,7 +140,7 @@ public class MusicWebService {
             return null;
         }
         
-        Optional<DiskType> optionalDisk =  disks.stream()
+        Optional<DiskType> optionalDisk =  DISKS.stream()
                 .filter(disk -> getDiskSongListRequest.getDiskId().equals(disk.getId()))
                 .findAny();
         
@@ -156,8 +156,8 @@ public class MusicWebService {
             return null;
         }
         
-        if (!addDiskSongRequests.containsKey(addDiskSongRequest.getRequestCode())) {
-            Optional<DiskType> optionalDisk = disks.stream()
+        if (!ADD_DISK_SONG_REQUESTS.containsKey(addDiskSongRequest.getRequestCode())) {
+            Optional<DiskType> optionalDisk = DISKS.stream()
                 .filter(disk -> addDiskSongRequest.getDiskId().equals(disk.getId()))
                 .findAny();
         
@@ -165,7 +165,7 @@ public class MusicWebService {
                 return null;
             }
             
-            Optional<SongType> optionalSong = songs.stream()
+            Optional<SongType> optionalSong = SONGS.stream()
                     .filter(song -> addDiskSongRequest.getSongId().equals(song.getId()))
                     .findAny();
             
@@ -178,10 +178,18 @@ public class MusicWebService {
             newDiskSong.setFormat(addDiskSongRequest.getFormat());
             newDiskSong.setStartTimeSeconds(addDiskSongRequest.getStartTimeSeconds());
             optionalDisk.get().getDiskSongList().getDiskSong().add(newDiskSong);
-            addDiskSongRequests.put(addDiskSongRequest.getRequestCode(), newDiskSong);
+            ADD_DISK_SONG_REQUESTS.put(addDiskSongRequest.getRequestCode(), newDiskSong);
             autoId = autoId.add(BigInteger.ONE);
+            
+            optionalDisk.get().setLengthSeconds(BigInteger.ZERO);
+            optionalDisk.get().getDiskSongList().getDiskSong().forEach(song -> {
+                BigInteger endTime = song.getStartTimeSeconds().add(song.getSong().getLengthSeconds());
+                if (endTime.compareTo(optionalDisk.get().getLengthSeconds()) > 0) {
+                    optionalDisk.get().setLengthSeconds(endTime);
+                }
+            });
         }
         
-        return addDiskSongRequests.get(addDiskSongRequest.getRequestCode());
+        return ADD_DISK_SONG_REQUESTS.get(addDiskSongRequest.getRequestCode());
     }
 }

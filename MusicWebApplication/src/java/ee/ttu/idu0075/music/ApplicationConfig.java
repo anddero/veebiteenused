@@ -35,6 +35,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(ee.ttu.idu0075.music.DisksResource.class);
         resources.add(ee.ttu.idu0075.music.SongsResource.class);
     }
     
