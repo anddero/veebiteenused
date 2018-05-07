@@ -1,0 +1,307 @@
+{
+	"info": {
+		"_postman_id": "3ff39047-34b1-4783-8faf-aada3498f627",
+		"name": "Veebiteenused",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetSongList",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "salajane"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/songs/",
+					"protocol": "http",
+					"host": [
+						"desktop-3gp1dnb"
+					],
+					"port": "8080",
+					"path": [
+						"MusicWebApplication",
+						"webresources",
+						"songs",
+						""
+					]
+				},
+				"description": "Get the list of all songs."
+			},
+			"response": []
+		},
+		{
+			"name": "GetSong",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "salajane",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/songs/1?token=salajane",
+					"protocol": "http",
+					"host": [
+						"desktop-3gp1dnb"
+					],
+					"port": "8080",
+					"path": [
+						"MusicWebApplication",
+						"webresources",
+						"songs",
+						"1"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane"
+						}
+					]
+				},
+				"description": "Get a single song."
+			},
+			"response": []
+		},
+		{
+			"name": "AddSong",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "salajane",
+						"disabled": true
+					},
+					{
+						"key": "requestCode",
+						"value": "2345678",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"name\": \"Sing Me To Sleep\",\n\t\"author\": \"Alan Walker\",\n\t\"lengthSeconds\": 183\n}\n"
+				},
+				"url": {
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/songs?requestCode=1234&token=salajane",
+					"protocol": "http",
+					"host": [
+						"desktop-3gp1dnb"
+					],
+					"port": "8080",
+					"path": [
+						"MusicWebApplication",
+						"webresources",
+						"songs"
+					],
+					"query": [
+						{
+							"key": "requestCode",
+							"value": "1234"
+						},
+						{
+							"key": "token",
+							"value": "salajane"
+						}
+					]
+				},
+				"description": "Add a song."
+			},
+			"response": []
+		},
+		{
+			"name": "GetDiskList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/?token=salajane&minLengthSeconds=306",
+					"protocol": "http",
+					"host": [
+						"desktop-3gp1dnb"
+					],
+					"port": "8080",
+					"path": [
+						"MusicWebApplication",
+						"webresources",
+						"disks",
+						""
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane"
+						},
+						{
+							"key": "minLengthSeconds",
+							"value": "306"
+						}
+					]
+				},
+				"description": "Get a list of all disks with some optional filters."
+			},
+			"response": []
+		},
+		{
+			"name": "GetDisk",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/2?token=salajane",
+					"protocol": "http",
+					"host": [
+						"desktop-3gp1dnb"
+					],
+					"port": "8080",
+					"path": [
+						"MusicWebApplication",
+						"webresources",
+						"disks",
+						"2"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane"
+						}
+					]
+				},
+				"description": "Get information about a single disk."
+			},
+			"response": []
+		},
+		{
+			"name": "AddDisk",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Veebiteenused sinuga\",\n\t\"author\": \"Ангелина\"\n}"
+				},
+				"url": {
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks?requestCode=18&token=salajane",
+					"protocol": "http",
+					"host": [
+						"desktop-3gp1dnb"
+					],
+					"port": "8080",
+					"path": [
+						"MusicWebApplication",
+						"webresources",
+						"disks"
+					],
+					"query": [
+						{
+							"key": "requestCode",
+							"value": "18"
+						},
+						{
+							"key": "token",
+							"value": "salajane"
+						}
+					]
+				},
+				"description": "Add a disk."
+			},
+			"response": []
+		},
+		{
+			"name": "GetDiskSongList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/2?token=salajane&minLengthSeconds=307",
+					"protocol": "http",
+					"host": [
+						"desktop-3gp1dnb"
+					],
+					"port": "8080",
+					"path": [
+						"MusicWebApplication",
+						"webresources",
+						"disks",
+						"2"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane"
+						},
+						{
+							"key": "minLengthSeconds",
+							"value": "307"
+						}
+					]
+				},
+				"description": "Get the list of songs on a disk."
+			},
+			"response": []
+		},
+		{
+			"name": "AddDiskSong",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"songId\": 0,\n\t\"startTimeSeconds\": 123,\n\t\"format\": \"mp3\"\n}"
+				},
+				"url": {
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/1/songs?requestCode=23&token=salajane",
+					"protocol": "http",
+					"host": [
+						"desktop-3gp1dnb"
+					],
+					"port": "8080",
+					"path": [
+						"MusicWebApplication",
+						"webresources",
+						"disks",
+						"1",
+						"songs"
+					],
+					"query": [
+						{
+							"key": "requestCode",
+							"value": "23"
+						},
+						{
+							"key": "token",
+							"value": "salajane"
+						}
+					]
+				},
+				"description": "Add a song to the disk."
+			},
+			"response": []
+		}
+	]
+}
