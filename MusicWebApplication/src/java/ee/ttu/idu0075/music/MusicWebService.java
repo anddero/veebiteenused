@@ -47,18 +47,39 @@ public class MusicWebService {
 
     public SongType getSong(GetSongRequest getSongRequest) {
         if (!PASSWORD.equalsIgnoreCase(getSongRequest.getToken())) {
-            return null;
+            throw new RuntimeException("Invalid token"); // token null or invalid
         }
         
-        return SONGS.stream()
+        Optional<SongType> optionalSong =  SONGS.stream()
                 .filter(s -> getSongRequest.getId().equals(s.getId()))
-                .findAny()
-                .orElse(null);
+                .findAny();
+
+        if (!optionalSong.isPresent()) {
+            throw new RuntimeException("Invalid song id"); // id null or invalid
+        }
+        
+        return optionalSong.get();
     }
 
     public SongType addSong(AddSongRequest addSongRequest) {
         if (!PASSWORD.equalsIgnoreCase(addSongRequest.getToken())) {
-            return null;
+            throw new RuntimeException("Invalid token"); // token null or invalid
+        }
+        
+        if (addSongRequest.getRequestCode() == null) {
+            throw new RuntimeException("Missing requestCode"); // requestCode null
+        }
+        
+        if (addSongRequest.getName() == null) {
+            throw new RuntimeException("Missing name"); // name null
+        }
+        
+        if (addSongRequest.getAuthor() == null) {
+            throw new RuntimeException("Missing author"); // author null
+        }
+        
+        if (addSongRequest.getLengthSeconds() == null) {
+            throw new RuntimeException("Missing lengthSeconds"); // lengthSeconds null
         }
         
         if (!ADD_SONG_REQUESTS.containsKey(addSongRequest.getRequestCode())) {
@@ -77,7 +98,7 @@ public class MusicWebService {
 
     public GetSongListResponse getSongList(GetSongListRequest getSongListRequest) {
         if (!PASSWORD.equalsIgnoreCase(getSongListRequest.getToken())) {
-            return null;
+            throw new RuntimeException("Invalid or missing token"); // token null or invalid
         }
         
         GetSongListResponse response = new GetSongListResponse();
@@ -87,18 +108,35 @@ public class MusicWebService {
 
     public DiskType getDisk(GetDiskRequest getDiskRequest) {
         if (!PASSWORD.equalsIgnoreCase(getDiskRequest.getToken())) {
-            return null;
+            throw new RuntimeException("Invalid or missing token"); // token null or invalid
         }
         
-        return DISKS.stream()
+        Optional<DiskType> optionalDisk = DISKS.stream()
                 .filter(disk -> getDiskRequest.getId().equals(disk.getId()))
-                .findAny()
-                .orElse(null);
+                .findAny();
+        
+        if (!optionalDisk.isPresent()) {
+            throw new RuntimeException("Invalid or missing id"); // id null or invalid
+        }
+        
+        return optionalDisk.get();
     }
 
     public DiskType addDisk(AddDiskRequest addDiskRequest) {
         if (!PASSWORD.equalsIgnoreCase(addDiskRequest.getToken())) {
-            return null;
+            throw new RuntimeException("Missing or invalid token"); // token null or invalid
+        }
+        
+        if (addDiskRequest.getRequestCode() == null) {
+            throw new RuntimeException("Missing requestCode"); // requestCode null
+        }
+        
+        if (addDiskRequest.getName() == null) {
+            throw new RuntimeException("Missing name"); // name null
+        }
+        
+        if (addDiskRequest.getAuthor() == null) {
+            throw new RuntimeException("Missing author"); // author null
         }
         
         if (!ADD_DISK_REQUESTS.containsKey(addDiskRequest.getRequestCode())) {
@@ -118,7 +156,7 @@ public class MusicWebService {
 
     public GetDiskListResponse getDiskList(GetDiskListRequest request) {
         if (!PASSWORD.equalsIgnoreCase(request.getToken())) {
-            return null;
+            throw new RuntimeException("Missing or invalid token"); // token null or missing
         }
         
         GetDiskListResponse response = new GetDiskListResponse();
@@ -137,23 +175,35 @@ public class MusicWebService {
 
     public DiskSongListType getDiskSongList(GetDiskSongListRequest getDiskSongListRequest) {
         if (!PASSWORD.equalsIgnoreCase(getDiskSongListRequest.getToken())) {
-            return null;
+            throw new RuntimeException("Missing or invalid token"); // token null or invalid
         }
         
         Optional<DiskType> optionalDisk =  DISKS.stream()
                 .filter(disk -> getDiskSongListRequest.getDiskId().equals(disk.getId()))
                 .findAny();
         
-        if (optionalDisk.isPresent()) {
-            return optionalDisk.get().getDiskSongList();
+        if (!optionalDisk.isPresent()) {
+            throw new RuntimeException("Missing or invalid diskId"); // diskId null or invalid
         }
         
-        return null;
+        return optionalDisk.get().getDiskSongList();
     }
 
     public DiskSongType addDiskSong(AddDiskSongRequest addDiskSongRequest) {
         if (!PASSWORD.equalsIgnoreCase(addDiskSongRequest.getToken())) {
-            return null;
+            throw new RuntimeException("Invalid token"); // token null or invalid
+        }
+        
+        if (addDiskSongRequest.getRequestCode() == null) {
+            throw new RuntimeException("Missing requestCode"); // requestCode null
+        }
+        
+        if (addDiskSongRequest.getStartTimeSeconds() == null) {
+            throw new RuntimeException("Missing startTimeSeconds"); // startTimeSeconds null
+        }
+        
+        if (addDiskSongRequest.getFormat() == null) {
+            throw new RuntimeException("Missing format"); // format null
         }
         
         if (!ADD_DISK_SONG_REQUESTS.containsKey(addDiskSongRequest.getRequestCode())) {
@@ -162,7 +212,7 @@ public class MusicWebService {
                 .findAny();
         
             if (!optionalDisk.isPresent()) {
-                return null;
+                throw new RuntimeException("Missing or invalid diskId"); // diskId null or invalid
             }
             
             Optional<SongType> optionalSong = SONGS.stream()
@@ -170,13 +220,13 @@ public class MusicWebService {
                     .findAny();
             
             if (!optionalSong.isPresent()) {
-                return null;
+                throw new RuntimeException("Missing or invalid songId"); // songId null or invalid
             }
             
             if (!"mp3".equalsIgnoreCase(addDiskSongRequest.getFormat())
                     && !"wav".equalsIgnoreCase(addDiskSongRequest.getFormat())
                     && !"ogg".equalsIgnoreCase(addDiskSongRequest.getFormat())) {
-                return null;
+                throw new RuntimeException("Invalid format"); // format invalid
             }
             
             DiskSongType newDiskSong = new DiskSongType();
