@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mus:addDiskSongRequest>
+         <mus:requestCode>9213</mus:requestCode>
+         <mus:token>salajne</mus:token>
+         <mus:diskId>4</mus:diskId>
+         <mus:songId>5</mus:songId>
+         <mus:startTimeSeconds>2</mus:startTimeSeconds>
+         <mus:format>mp3</mus:format>
+      </mus:addDiskSongRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
