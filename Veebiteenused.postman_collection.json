@@ -291,7 +291,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/?token=salajane&minLengthSeconds=299&maxLengthSeconds=2000&minSongCount=0&maxSongCount=30",
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/?token=salajane&minLengthSeconds=0&maxLengthSeconds=2000&minSongCount=0&maxSongCount=30",
 					"protocol": "http",
 					"host": [
 						"desktop-3gp1dnb"
@@ -310,7 +310,7 @@
 						},
 						{
 							"key": "minLengthSeconds",
-							"value": "299"
+							"value": "0"
 						},
 						{
 							"key": "maxLengthSeconds",
