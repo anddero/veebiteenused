@@ -29,16 +29,6 @@
 				"method": "POST",
 				"header": [
 					{
-						"key": "token",
-						"value": "salajane",
-						"disabled": true
-					},
-					{
-						"key": "requestCode",
-						"value": "2345678",
-						"disabled": true
-					},
-					{
 						"key": "Content-Type",
 						"value": "application/json"
 					}
@@ -96,13 +86,7 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "token",
-						"value": "salajane",
-						"disabled": true
-					}
-				],
+				"header": [],
 				"body": {},
 				"url": {
 					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/songs/3?token=salajane",
@@ -156,13 +140,7 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "token",
-						"value": "salajane",
-						"disabled": true
-					}
-				],
+				"header": [],
 				"body": {},
 				"url": {
 					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/songs?token=salajane",
