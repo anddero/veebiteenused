@@ -171,17 +171,14 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "a1779b2b-27db-4990-b3d7-22f32f908d0b",
+						"id": "0962d7f1-9176-4233-84f6-f5f0a31044a8",
 						"type": "text/javascript",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
 							"",
 							"tests[\"Check id\"] = data.id === 4;",
 							"tests[\"Check name\"] = data.name === \"MySecondDisk\";",
-							"tests[\"Check author\"] = data.author === \"You\";",
-							"tests[\"Check lengthSeconds\"] = data.lengthSeconds === 0;",
-							"tests[\"Check diskSongList\"] = data.diskSongList.diskSong.length === 0;",
-							""
+							"tests[\"Check author\"] = data.author === \"You\";"
 						]
 					}
 				}
@@ -231,17 +228,14 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "7f00f89d-b114-456a-8c86-f37ee20b9349",
+						"id": "83ce05c5-c4ca-4415-9b2a-8d9535a79117",
 						"type": "text/javascript",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
 							"",
 							"tests[\"Check id\"] = data.id === 4;",
 							"tests[\"Check name\"] = data.name === \"MySecondDisk\";",
-							"tests[\"Check author\"] = data.author === \"You\";",
-							"tests[\"Check lengthSeconds\"] = data.lengthSeconds === 0;",
-							"tests[\"Check diskSongList\"] = data.diskSongList.diskSong.length === 0;",
-							""
+							"tests[\"Check author\"] = data.author === \"You\";"
 						]
 					}
 				}
@@ -297,7 +291,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/?token=salajane",
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/?token=salajane&minLengthSeconds=299&maxLengthSeconds=2000&minSongCount=0&maxSongCount=30",
 					"protocol": "http",
 					"host": [
 						"desktop-3gp1dnb"
@@ -313,6 +307,22 @@
 						{
 							"key": "token",
 							"value": "salajane"
+						},
+						{
+							"key": "minLengthSeconds",
+							"value": "299"
+						},
+						{
+							"key": "maxLengthSeconds",
+							"value": "2000"
+						},
+						{
+							"key": "minSongCount",
+							"value": "0"
+						},
+						{
+							"key": "maxSongCount",
+							"value": "30"
 						}
 					]
 				},
@@ -401,7 +411,7 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/4?token=salajane&minLengthSeconds=307",
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/4?token=salajane",
 					"protocol": "http",
 					"host": [
 						"desktop-3gp1dnb"
@@ -417,10 +427,6 @@
 						{
 							"key": "token",
 							"value": "salajane"
-						},
-						{
-							"key": "minLengthSeconds",
-							"value": "307"
 						}
 					]
 				},

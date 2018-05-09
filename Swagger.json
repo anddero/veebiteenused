@@ -223,6 +223,38 @@
             "required": true,
             "type": "string",
             "description": ""
+          },
+          {
+            "name": "minLengthSeconds",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "maxLengthSeconds",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "minSongCount",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "maxSongCount",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
           }
         ],
         "responses": {
@@ -235,7 +267,7 @@
           {
             "request": {
               "method": "GET",
-              "uri": "/disks?token=salajane"
+              "uri": "/disks?token=salajane&minLengthSeconds=299&maxLengthSeconds=2000&minSongCount=0&maxSongCount=30"
             },
             "expectedResponse": {
               "x-allowExtraHeaders": true,
@@ -357,14 +389,6 @@
             "required": true,
             "type": "string",
             "description": ""
-          },
-          {
-            "name": "minLengthSeconds",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": ""
           }
         ],
         "responses": {
@@ -377,7 +401,7 @@
           {
             "request": {
               "method": "GET",
-              "uri": "/disks/4?token=salajane&minLengthSeconds=307"
+              "uri": "/disks/4?token=salajane"
             },
             "expectedResponse": {
               "x-allowExtraHeaders": true,
