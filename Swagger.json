@@ -227,7 +227,7 @@
           {
             "name": "minLengthSeconds",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "description": ""
@@ -235,7 +235,7 @@
           {
             "name": "maxLengthSeconds",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "description": ""
@@ -243,7 +243,7 @@
           {
             "name": "minSongCount",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "description": ""
@@ -251,7 +251,7 @@
           {
             "name": "maxSongCount",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "integer",
             "format": "int32",
             "description": ""
