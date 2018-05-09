@@ -602,8 +602,7 @@
       },
       "required": [
         "songId",
-        "startTimeSeconds",
-        "format"
+        "startTimeSeconds"
       ]
     }
   }
