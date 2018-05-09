@@ -35,13 +35,6 @@
             "required": true,
             "type": "string",
             "description": ""
-          },
-          {
-            "name": "token",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": ""
           }
         ],
         "responses": {
@@ -54,7 +47,7 @@
           {
             "request": {
               "method": "GET",
-              "uri": "/songs?token=salajane&token=salajane"
+              "uri": "/songs?token=salajane"
             },
             "expectedResponse": {
               "x-allowExtraHeaders": true,
