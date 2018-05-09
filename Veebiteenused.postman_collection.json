@@ -6,72 +6,25 @@
 	},
 	"item": [
 		{
-			"name": "GetSongList",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "token",
-						"value": "salajane"
-					}
-				],
-				"body": {},
-				"url": {
-					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/songs/",
-					"protocol": "http",
-					"host": [
-						"desktop-3gp1dnb"
-					],
-					"port": "8080",
-					"path": [
-						"MusicWebApplication",
-						"webresources",
-						"songs",
-						""
-					]
-				},
-				"description": "Get the list of all songs."
-			},
-			"response": []
-		},
-		{
-			"name": "GetSong",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "token",
-						"value": "salajane",
-						"disabled": true
-					}
-				],
-				"body": {},
-				"url": {
-					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/songs/1?token=salajane",
-					"protocol": "http",
-					"host": [
-						"desktop-3gp1dnb"
-					],
-					"port": "8080",
-					"path": [
-						"MusicWebApplication",
-						"webresources",
-						"songs",
-						"1"
-					],
-					"query": [
-						{
-							"key": "token",
-							"value": "salajane"
-						}
-					]
-				},
-				"description": "Get a single song."
-			},
-			"response": []
-		},
-		{
 			"name": "AddSong",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "862a2040-f590-4f4e-929c-5196b78af72d",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"",
+							"tests[\"Check id\"] = data.id === 3;",
+							"tests[\"Check name\"] = data.name === \"Sing Me To Sleep\";",
+							"tests[\"Check author\"] = data.author === \"Alan Walker\";",
+							"tests[\"Check lengthSeconds\"] = data.lengthSeconds === 183;",
+							""
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -95,7 +48,7 @@
 					"raw": "{\n\t\"id\": 1,\n\t\"name\": \"Sing Me To Sleep\",\n\t\"author\": \"Alan Walker\",\n\t\"lengthSeconds\": 183\n}\n"
 				},
 				"url": {
-					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/songs?requestCode=1234&token=salajane",
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/songs?requestCode=12524&token=salajane",
 					"protocol": "http",
 					"host": [
 						"desktop-3gp1dnb"
@@ -109,7 +62,7 @@
 					"query": [
 						{
 							"key": "requestCode",
-							"value": "1234"
+							"value": "12524"
 						},
 						{
 							"key": "token",
@@ -122,13 +75,250 @@
 			"response": []
 		},
 		{
-			"name": "GetDiskList",
+			"name": "GetSong",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "147620f5-ae26-49fe-9ae5-34ff4812f32e",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"",
+							"tests[\"Check id\"] = data.id === 3;",
+							"tests[\"Check name\"] = data.name === \"Sing Me To Sleep\";",
+							"tests[\"Check author\"] = data.author === \"Alan Walker\";",
+							"tests[\"Check lengthSeconds\"] = data.lengthSeconds === 183;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "salajane",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/songs/3?token=salajane",
+					"protocol": "http",
+					"host": [
+						"desktop-3gp1dnb"
+					],
+					"port": "8080",
+					"path": [
+						"MusicWebApplication",
+						"webresources",
+						"songs",
+						"3"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane"
+						}
+					]
+				},
+				"description": "Get a single song."
+			},
+			"response": []
+		},
+		{
+			"name": "GetSongList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7df07d77-8218-4bb7-ad58-a0e588c54afd",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"",
+							"tests[\"Check first song id\"] = data.song[0].id === 1;",
+							"tests[\"Check first song name\"] = data.song[0].name === \"MyFirstSong\";",
+							"tests[\"Check first song author\"] = data.song[0].author === \"Ants\";",
+							"tests[\"Check first song lengthSeconds\"] = data.song[0].lengthSeconds === 300;",
+							"",
+							"",
+							"tests[\"Check second song id\"] = data.song[1].id === 3;",
+							"tests[\"Check second song name\"] = data.song[1].name === \"Sing Me To Sleep\";",
+							"tests[\"Check second song author\"] = data.song[1].author === \"Alan Walker\";",
+							"tests[\"Check second song lengthSeconds\"] = data.song[1].lengthSeconds === 183;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "salajane"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/songs?token=salajane",
+					"protocol": "http",
+					"host": [
+						"desktop-3gp1dnb"
+					],
+					"port": "8080",
+					"path": [
+						"MusicWebApplication",
+						"webresources",
+						"songs"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane"
+						}
+					]
+				},
+				"description": "Get the list of all songs."
+			},
+			"response": []
+		},
+		{
+			"name": "AddDisk",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a1779b2b-27db-4990-b3d7-22f32f908d0b",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"",
+							"tests[\"Check id\"] = data.id === 4;",
+							"tests[\"Check name\"] = data.name === \"MySecondDisk\";",
+							"tests[\"Check author\"] = data.author === \"You\";",
+							"tests[\"Check lengthSeconds\"] = data.lengthSeconds === 0;",
+							"tests[\"Check diskSongList\"] = data.diskSongList.diskSong.length === 0;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"MySecondDisk\",\n\t\"author\": \"You\"\n}"
+				},
+				"url": {
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks?requestCode=128&token=salajane",
+					"protocol": "http",
+					"host": [
+						"desktop-3gp1dnb"
+					],
+					"port": "8080",
+					"path": [
+						"MusicWebApplication",
+						"webresources",
+						"disks"
+					],
+					"query": [
+						{
+							"key": "requestCode",
+							"value": "128"
+						},
+						{
+							"key": "token",
+							"value": "salajane"
+						}
+					]
+				},
+				"description": "Add a disk."
+			},
+			"response": []
+		},
+		{
+			"name": "GetDisk",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7f00f89d-b114-456a-8c86-f37ee20b9349",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"",
+							"tests[\"Check id\"] = data.id === 4;",
+							"tests[\"Check name\"] = data.name === \"MySecondDisk\";",
+							"tests[\"Check author\"] = data.author === \"You\";",
+							"tests[\"Check lengthSeconds\"] = data.lengthSeconds === 0;",
+							"tests[\"Check diskSongList\"] = data.diskSongList.diskSong.length === 0;",
+							""
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/?token=salajane&minLengthSeconds=306",
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/4?token=salajane",
+					"protocol": "http",
+					"host": [
+						"desktop-3gp1dnb"
+					],
+					"port": "8080",
+					"path": [
+						"MusicWebApplication",
+						"webresources",
+						"disks",
+						"4"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "salajane"
+						}
+					]
+				},
+				"description": "Get information about a single disk."
+			},
+			"response": []
+		},
+		{
+			"name": "GetDiskList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "449b5f69-b1b3-4aaa-bde1-b9bcb77d2e89",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"",
+							"tests[\"Check song\"] = data.disk[0].diskSongList.diskSong[0].song.lengthSeconds === 300;",
+							"tests[\"Check contents\"] = data.disk[1].author === \"You\";",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/?token=salajane",
 					"protocol": "http",
 					"host": [
 						"desktop-3gp1dnb"
@@ -144,10 +334,6 @@
 						{
 							"key": "token",
 							"value": "salajane"
-						},
-						{
-							"key": "minLengthSeconds",
-							"value": "306"
 						}
 					]
 				},
@@ -156,37 +342,23 @@
 			"response": []
 		},
 		{
-			"name": "GetDisk",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/2?token=salajane",
-					"protocol": "http",
-					"host": [
-						"desktop-3gp1dnb"
-					],
-					"port": "8080",
-					"path": [
-						"MusicWebApplication",
-						"webresources",
-						"disks",
-						"2"
-					],
-					"query": [
-						{
-							"key": "token",
-							"value": "salajane"
-						}
-					]
-				},
-				"description": "Get information about a single disk."
-			},
-			"response": []
-		},
-		{
-			"name": "AddDisk",
+			"name": "AddDiskSong",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f246245a-48a5-47f1-ad63-974d6f1f9150",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"",
+							"tests[\"Check startTimeSeconds\"] = data.startTimeSeconds === 123;",
+							"tests[\"Check format\"] = data.format === \"ogg\";",
+							""
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -197,43 +369,10 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"Veebiteenused sinuga\",\n\t\"author\": \"Ангелина\"\n}"
+					"raw": "{\n\t\"songId\": 3,\n\t\"startTimeSeconds\": 123,\n\t\"format\": \"ogg\"\n}"
 				},
 				"url": {
-					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks?requestCode=18&token=salajane",
-					"protocol": "http",
-					"host": [
-						"desktop-3gp1dnb"
-					],
-					"port": "8080",
-					"path": [
-						"MusicWebApplication",
-						"webresources",
-						"disks"
-					],
-					"query": [
-						{
-							"key": "requestCode",
-							"value": "18"
-						},
-						{
-							"key": "token",
-							"value": "salajane"
-						}
-					]
-				},
-				"description": "Add a disk."
-			},
-			"response": []
-		},
-		{
-			"name": "GetDiskSongList",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/2?token=salajane&minLengthSeconds=307",
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/4/songs?requestCode=2231&token=salajane",
 					"protocol": "http",
 					"host": [
 						"desktop-3gp1dnb"
@@ -243,7 +382,57 @@
 						"MusicWebApplication",
 						"webresources",
 						"disks",
-						"2"
+						"4",
+						"songs"
+					],
+					"query": [
+						{
+							"key": "requestCode",
+							"value": "2231"
+						},
+						{
+							"key": "token",
+							"value": "salajane"
+						}
+					]
+				},
+				"description": "Add a song to the disk."
+			},
+			"response": []
+		},
+		{
+			"name": "GetDiskSongList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4bd460dc-8607-4919-bc37-78d50871b8cd",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"",
+							"tests[\"Check contents\"] = data.diskSongList.diskSong.length === 1;",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/4?token=salajane&minLengthSeconds=307",
+					"protocol": "http",
+					"host": [
+						"desktop-3gp1dnb"
+					],
+					"port": "8080",
+					"path": [
+						"MusicWebApplication",
+						"webresources",
+						"disks",
+						"4"
 					],
 					"query": [
 						{
@@ -257,49 +446,6 @@
 					]
 				},
 				"description": "Get the list of songs on a disk."
-			},
-			"response": []
-		},
-		{
-			"name": "AddDiskSong",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"songId\": 0,\n\t\"startTimeSeconds\": 123,\n\t\"format\": \"mp3\"\n}"
-				},
-				"url": {
-					"raw": "http://desktop-3gp1dnb:8080/MusicWebApplication/webresources/disks/1/songs?requestCode=23&token=salajane",
-					"protocol": "http",
-					"host": [
-						"desktop-3gp1dnb"
-					],
-					"port": "8080",
-					"path": [
-						"MusicWebApplication",
-						"webresources",
-						"disks",
-						"1",
-						"songs"
-					],
-					"query": [
-						{
-							"key": "requestCode",
-							"value": "23"
-						},
-						{
-							"key": "token",
-							"value": "salajane"
-						}
-					]
-				},
-				"description": "Add a song to the disk."
 			},
 			"response": []
 		}
