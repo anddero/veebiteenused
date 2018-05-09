@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="d34feacf-bbad-458f-b737-fab07c9609cf" activeEnvironment="Default" name="MusicService" resourceRoot="" soapui-version="5.4.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="1e60328e-b613-4ba4-9b85-ff11bb41c920" wsaVersion="NONE" name="MusicBinding" type="wsdl" bindingName="{http://www.ttu.ee/idu0075/2018/ws/164718/music}MusicBinding" soapVersion="1_1" anonymous="optional" definition="http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService?wsdl"><con:part><con:url>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService?wsdl</con:url><con:content><![CDATA[<!--Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown.-->
+<wsdl:definitions targetNamespace="http://www.ttu.ee/idu0075/2018/ws/164718/music" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.ttu.ee/idu0075/2018/ws/164718/music">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.ttu.ee/idu0075/2018/ws/164718/music" elementFormDefault="qualified">
+      <xs:simpleType name="formatType">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="mp3|wav|ogg"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="songType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="author" type="xs:string"/>
+          <xs:element name="lengthSeconds" type="xs:integer"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="diskSongType">
+        <xs:sequence>
+          <xs:element name="song" type="tns:songType"/>
+          <xs:element name="startTimeSeconds" type="xs:integer"/>
+          <xs:element name="format" type="tns:formatType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="diskSongListType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="diskSong" type="tns:diskSongType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="diskType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="author" type="xs:string"/>
+          <xs:element name="lengthSeconds" type="xs:integer"/>
+          <xs:element name="diskSongList" type="tns:diskSongListType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getSongRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getSongResponse" type="tns:songType"/>
+      <xs:element name="addSongRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="requestCode" type="xs:integer"/>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="author" type="xs:string"/>
+            <xs:element name="lengthSeconds" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addSongResponse" type="tns:songType"/>
+      <xs:element name="getSongListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getSongListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="song" type="tns:songType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDiskRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDiskResponse" type="tns:diskType"/>
+      <xs:element name="addDiskRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="requestCode" type="xs:integer"/>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="author" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addDiskResponse" type="tns:diskType"/>
+      <xs:element name="getDiskListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element minOccurs="0" name="minLengthSeconds" type="xs:integer"/>
+            <xs:element minOccurs="0" name="maxLengthSeconds" type="xs:integer"/>
+            <xs:element minOccurs="0" name="minSongCount" type="xs:integer"/>
+            <xs:element minOccurs="0" name="maxSongCount" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDiskListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="disk" type="tns:diskType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDiskSongListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="diskId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDiskSongListResponse" type="tns:diskSongListType"/>
+      <xs:element name="addDiskSongRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="requestCode" type="xs:integer"/>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="diskId" type="xs:integer"/>
+            <xs:element name="songId" type="xs:integer"/>
+            <xs:element name="startTimeSeconds" type="xs:integer"/>
+            <xs:element name="format" type="tns:formatType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addDiskSongResponse" type="tns:diskSongType"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getSongMessageRequest">
+    <wsdl:part name="parameter" element="tns:getSongRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getSongMessageResponse">
+    <wsdl:part name="parameter" element="tns:getSongResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addSongMessageRequest">
+    <wsdl:part name="parameter" element="tns:addSongRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addSongMessageResponse">
+    <wsdl:part name="parameter" element="tns:addSongResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getSongListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getSongListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getSongListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getSongListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getDiskMessageRequest">
+    <wsdl:part name="parameter" element="tns:getDiskRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getDiskMessageResponse">
+    <wsdl:part name="parameter" element="tns:getDiskResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addDiskMessageRequest">
+    <wsdl:part name="parameter" element="tns:addDiskRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addDiskMessageResponse">
+    <wsdl:part name="parameter" element="tns:addDiskResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getDiskListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getDiskListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getDiskListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getDiskListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getDiskSongListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getDiskSongListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getDiskSongListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getDiskSongListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addDiskSongMessageRequest">
+    <wsdl:part name="parameter" element="tns:addDiskSongRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addDiskSongMessageResponse">
+    <wsdl:part name="parameter" element="tns:addDiskSongResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="MusicPortType">
+    <wsdl:operation name="getSong">
+      <wsdl:input message="tns:getSongMessageRequest"/>
+      <wsdl:output message="tns:getSongMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addSong">
+      <wsdl:input message="tns:addSongMessageRequest"/>
+      <wsdl:output message="tns:addSongMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getSongList">
+      <wsdl:input message="tns:getSongListMessageRequest"/>
+      <wsdl:output message="tns:getSongListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getDisk">
+      <wsdl:input message="tns:getDiskMessageRequest"/>
+      <wsdl:output message="tns:getDiskMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addDisk">
+      <wsdl:input message="tns:addDiskMessageRequest"/>
+      <wsdl:output message="tns:addDiskMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getDiskList">
+      <wsdl:input message="tns:getDiskListMessageRequest"/>
+      <wsdl:output message="tns:getDiskListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getDiskSongList">
+      <wsdl:input message="tns:getDiskSongListMessageRequest"/>
+      <wsdl:output message="tns:getDiskSongListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addDiskSong">
+      <wsdl:input message="tns:addDiskSongMessageRequest"/>
+      <wsdl:output message="tns:addDiskSongMessageResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MusicBinding" type="tns:MusicPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getSong">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addSong">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSongList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDisk">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addDisk">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDiskList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDiskSongList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addDiskSong">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MusicService">
+    <wsdl:port name="MusicPort" binding="tns:MusicBinding">
+      <soap:address location="http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint></con:endpoints><con:operation id="8a3ebba9-1d11-453b-8efa-9e93b198441b" isOneWay="false" action="" name="addDisk" bindingOperationName="addDisk" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="366606ff-1339-4a1e-b4a5-1510c38c1ca2" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:addDiskRequest>\r
+         <mus:requestCode>30</mus:requestCode>\r
+         <mus:token>salajane</mus:token>\r
+         <mus:name>UusDisk</mus:name>\r
+         <mus:author>Andero</mus:author>\r
+      </mus:addDiskRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/addDiskRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="32c34c4c-a586-481b-b42d-9da750c4923f" isOneWay="false" action="" name="addDiskSong" bindingOperationName="addDiskSong" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ef207be7-dff0-42a2-bb68-d0f405c07bf8" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:addDiskSongRequest>\r
+         <mus:requestCode>9213</mus:requestCode>\r
+         <mus:token>salajne</mus:token>\r
+         <mus:diskId>4</mus:diskId>\r
+         <mus:songId>5</mus:songId>\r
+         <mus:startTimeSeconds>2</mus:startTimeSeconds>\r
+         <mus:format>mp3</mus:format>\r
+      </mus:addDiskSongRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/addDiskSongRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="704d8cfe-e29f-47b0-8aaf-3b4d3f86bb00" isOneWay="false" action="" name="addSong" bindingOperationName="addSong" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7960efe6-73d2-4fdd-a3ca-479b3ebcaccd" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:addSongRequest>\r
+         <mus:requestCode>213</mus:requestCode>\r
+         <mus:token>salajane</mus:token>\r
+         <mus:name>Sing Me To Sleep</mus:name>\r
+         <mus:author>Alan Walker</mus:author>\r
+         <mus:lengthSeconds>183</mus:lengthSeconds>\r
+      </mus:addSongRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/addSongRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="8e562db1-4e72-4d61-b7ce-339fd5a98874" isOneWay="false" action="" name="getDisk" bindingOperationName="getDisk" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="4cc378dd-261b-480d-8ebc-5e8de8065a61" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:getDiskRequest>\r
+         <mus:token>?</mus:token>\r
+         <mus:id>?</mus:id>\r
+      </mus:getDiskRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/getDiskRequest"/></con:call></con:operation><con:operation id="985be59a-9930-45df-a9b5-a977303c75d1" isOneWay="false" action="" name="getDiskList" bindingOperationName="getDiskList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ff2a93cf-e92e-4251-b19c-cafb79b40a04" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:getDiskListRequest>\r
+         <mus:token>?</mus:token>\r
+         <!--Optional:-->\r
+         <mus:minLengthSeconds>?</mus:minLengthSeconds>\r
+         <!--Optional:-->\r
+         <mus:maxLengthSeconds>?</mus:maxLengthSeconds>\r
+         <!--Optional:-->\r
+         <mus:minSongCount>?</mus:minSongCount>\r
+         <!--Optional:-->\r
+         <mus:maxSongCount>?</mus:maxSongCount>\r
+      </mus:getDiskListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/getDiskListRequest"/></con:call></con:operation><con:operation id="262f26cb-39e4-4528-826f-f386181bf0aa" isOneWay="false" action="" name="getDiskSongList" bindingOperationName="getDiskSongList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5cbb2f42-d301-4890-a1e4-1541d9b7281a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:getDiskSongListRequest>\r
+         <mus:token>?</mus:token>\r
+         <mus:diskId>?</mus:diskId>\r
+      </mus:getDiskSongListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/getDiskSongListRequest"/></con:call></con:operation><con:operation id="6202ef10-2f66-4881-8d2f-76da5b4da343" isOneWay="false" action="" name="getSong" bindingOperationName="getSong" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="7d2a9dda-12cb-4807-839f-57de26f33aa2" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:getSongRequest>\r
+         <mus:token>?</mus:token>\r
+         <mus:id>?</mus:id>\r
+      </mus:getSongRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/getSongRequest"/></con:call></con:operation><con:operation id="cd39c22e-8cb8-4a98-bb23-6c794aede44a" isOneWay="false" action="" name="getSongList" bindingOperationName="getSongList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="67ae114f-31ba-4200-935e-53ff7af105c5" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:getSongListRequest>\r
+         <mus:token>?</mus:token>\r
+      </mus:getSongListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/getSongListRequest"/></con:call></con:operation></con:interface><con:testSuite id="cf289d17-f381-4652-a949-c069d5fdbfdc" name="MusicServiceTest"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="e6f57c3c-03db-49d8-9adf-496c53cd24c6" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addDisk TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="308429ce-eb4e-4ddf-89d4-8823545a9022" name="addDisk"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MusicBinding</con:interface><con:operation>addDisk</con:operation><con:request name="addDisk" id="b7ee425f-ed6f-4b47-b786-d6a504a8ee81"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:addDiskRequest>\r
+         <mus:requestCode>2</mus:requestCode>\r
+         <mus:token>salajane</mus:token>\r
+         <mus:name>MyNewDisk</mus:name>\r
+         <mus:author>Me</mus:author>\r
+      </mus:addDiskRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="fa432836-b74f-4f8f-a5d7-5c7451ebf36a" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="XPath Match" id="1fa14ef3-8a32-4248-b694-2acdae286049" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2018/ws/164718/music';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:addDiskResponse/ns1:name</path><content>MyNewDisk</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/addDiskRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="a6a5a09c-7280-4e1f-96ec-de86a68892a0" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addSong TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="d9de63d2-de73-4fd2-b8b4-abab2a778ac5" name="addSong"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MusicBinding</con:interface><con:operation>addSong</con:operation><con:request name="addSong" id="fb1446c1-deec-43b6-bbd7-40fce8f7735b"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:addSongRequest>\r
+         <mus:requestCode>41</mus:requestCode>\r
+         <mus:token>salajane</mus:token>\r
+         <mus:name>MyFirstSong</mus:name>\r
+         <mus:author>Ants</mus:author>\r
+         <mus:lengthSeconds>300</mus:lengthSeconds>\r
+      </mus:addSongRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="cbe2aa5e-13ad-4b66-98e5-87f832304e3d" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="XPath Match" id="72ab4099-d576-4df5-81df-159e3188a7b0" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2018/ws/164718/music';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:addSongResponse/ns1:author</path><content>Ants</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/addSongRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="5a3c58e0-707a-4a64-9496-3bd8bfe2a1af" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addDiskSong TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="29e73afd-2990-4c98-a249-f38011efb067" name="addDiskSong"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MusicBinding</con:interface><con:operation>addDiskSong</con:operation><con:request name="addDiskSong" id="102e4367-4e41-4203-b3b2-0d5897e2ed45"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:addDiskSongRequest>\r
+         <mus:requestCode>432</mus:requestCode>\r
+         <mus:token>salajane</mus:token>\r
+         <mus:diskId>0</mus:diskId>\r
+         <mus:songId>1</mus:songId>\r
+         <mus:startTimeSeconds>0</mus:startTimeSeconds>\r
+         <mus:format>mp3</mus:format>\r
+      </mus:addDiskSongRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="3752b75c-dd79-4f57-bad7-cbf930ffdd9b" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="XPath Match" id="72954c8e-3c58-46f5-a0d2-97a4514d781b" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2018/ws/164718/music';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:addDiskSongResponse/ns1:song/ns1:lengthSeconds</path><content>300</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/addDiskSongRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="94f64c68-e240-4931-9bd8-14c5bc0b71b8" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getDisk TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="7163b5e3-7ed2-494a-8ed8-8809887fe9f9" name="getDisk"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MusicBinding</con:interface><con:operation>getDisk</con:operation><con:request name="getDisk" id="62326200-9ff8-4e03-aaed-abebde79a1b8"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:getDiskRequest>\r
+         <mus:token>salajane</mus:token>\r
+         <mus:id>0</mus:id>\r
+      </mus:getDiskRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="ea673fa6-93d9-4468-8393-5e5cc3beb1a5" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="XPath Match" id="0d35c99f-7801-433d-895b-3d0d607aab6d" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2018/ws/164718/music';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:getDiskResponse/ns1:author</path><content>Me</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/getDiskRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="9493e0eb-eebb-4913-9e19-d3598f48c523" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getDiskList TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="fcc9022c-0777-4392-8407-484f7b8f1b6d" name="getDiskList"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MusicBinding</con:interface><con:operation>getDiskList</con:operation><con:request name="getDiskList" id="6239baee-9c97-4764-83ca-6000bca51c26"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:getDiskListRequest>\r
+         <mus:token>salajane</mus:token>\r
+      </mus:getDiskListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="4e57c4a9-6240-4022-be1f-0c6afcbd1d5e" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="XPath Match" id="fc8a1998-6d4c-40b2-943b-8f29ff7e8137" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2018/ws/164718/music';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:getDiskListResponse/ns1:disk/ns1:diskSongList/ns1:diskSong/ns1:song/ns1:name</path><content>MyFirstSong</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/getDiskListRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="40ad7a4b-0a21-49b2-b03f-0bf1d1a8dc16" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getDiskSongList TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="0d63dc25-965c-46db-978a-cb1ff58a617d" name="getDiskSongList"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MusicBinding</con:interface><con:operation>getDiskSongList</con:operation><con:request name="getDiskSongList" id="0ecba38f-bf56-41e4-b7e6-b5ab6e493c00"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:getDiskSongListRequest>\r
+         <mus:token>salajane</mus:token>\r
+         <mus:diskId>0</mus:diskId>\r
+      </mus:getDiskSongListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="df9e1b32-0829-4ce9-afa0-7277f050c526" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="XPath Match" id="69363962-9015-41f1-a907-69199ca18706" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2018/ws/164718/music';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:getDiskSongListResponse/ns1:diskSong/ns1:format</path><content>mp3</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/getDiskSongListRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="c8a7a9eb-e50f-413c-9252-81b5ecb8edd7" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getSong TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="b31742fa-b722-4ab5-8938-ef8c3109aafc" name="getSong"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MusicBinding</con:interface><con:operation>getSong</con:operation><con:request name="getSong" id="3dc92db3-7157-4c42-b6ef-7854d724957c"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:getSongRequest>\r
+         <mus:token>salajane</mus:token>\r
+         <mus:id>1</mus:id>\r
+      </mus:getSongRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="6d1f6b76-f93d-40ae-b10b-b48b00c20e76" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="XPath Match" id="a28f7150-393d-4e2b-8346-f96f66b54ad5" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2018/ws/164718/music';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:getSongResponse/ns1:id</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/getSongRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="9b3a5dae-725a-49bc-9307-3407837e9f33" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getSongList TestCase" searchProperties="true"><con:settings/><con:testStep type="request" id="57433a8f-2f2d-479a-bb42-e7cb887d6e07" name="getSongList"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MusicBinding</con:interface><con:operation>getSongList</con:operation><con:request name="getSongList" id="0ced6d66-3985-4d0a-a90f-0f416181f494"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://desktop-3gp1dnb:8080/MusicWebApplication/MusicService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mus="http://www.ttu.ee/idu0075/2018/ws/164718/music">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <mus:getSongListRequest>\r
+         <mus:token>salajane</mus:token>\r
+      </mus:getSongListRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="Schema Compliance" id="c37eaf81-e7e9-4a3c-9dea-f4adf2a44d13" name="Schema Compliance"><con:configuration><definition/></con:configuration></con:assertion><con:assertion type="XPath Match" id="4dd83cf3-5802-4372-af7b-5a3b02c05299" name="XPath Match"><con:configuration><path>declare namespace ns1='http://www.ttu.ee/idu0075/2018/ws/164718/music';
+declare namespace S='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:getSongListResponse/ns1:song/ns1:author</path><content>Ants</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://www.ttu.ee/idu0075/2018/ws/164718/music/MusicPortType/getSongListRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
