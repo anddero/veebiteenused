@@ -1,0 +1,593 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Veebiteenused",
+    "description": "TODO: Add Description"
+  },
+  "host": "desktop-3gp1dnb:8080",
+  "basePath": "/MusicWebApplication/webresources",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/songs": {
+      "get": {
+        "description": "Get the list of all songs.",
+        "summary": "GetSongList",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "SongsGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "GET",
+              "uri": "/songs?token=salajane&token=salajane"
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "GetSongList",
+            "x-testDescription": "Get the list of all songs."
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      },
+      "post": {
+        "description": "Add a song.",
+        "summary": "AddSong",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "SongsPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "requestCode",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddSongRequest"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "POST",
+              "uri": "/songs?requestCode=12524&token=salajane",
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "body": "{\"id\":1,\"name\":\"Sing Me To Sleep\",\"author\":\"Alan Walker\",\"lengthSeconds\":183}"
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "AddSong",
+            "x-testDescription": "Add a song."
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/songs/3": {
+      "get": {
+        "description": "Get a single song.",
+        "summary": "GetSong",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Songs3Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "GET",
+              "uri": "/songs/3?token=salajane"
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "GetSong",
+            "x-testDescription": "Get a single song."
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/disks": {
+      "get": {
+        "description": "Get a list of all disks with some optional filters.",
+        "summary": "GetDiskList",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "DisksGet",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "GET",
+              "uri": "/disks?token=salajane"
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "GetDiskList",
+            "x-testDescription": "Get a list of all disks with some optional filters."
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      },
+      "post": {
+        "description": "Add a disk.",
+        "summary": "AddDisk",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "DisksPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "requestCode",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddDiskRequest"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "POST",
+              "uri": "/disks?requestCode=128&token=salajane",
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "body": "{\"name\":\"MySecondDisk\",\"author\":\"You\"}"
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "AddDisk",
+            "x-testDescription": "Add a disk."
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/disks/4": {
+      "get": {
+        "description": "Get the list of songs on a disk.",
+        "summary": "GetDiskSongList",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Disks4Get2",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "minLengthSeconds",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "GET",
+              "uri": "/disks/4?token=salajane&minLengthSeconds=307"
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "GetDiskSongList",
+            "x-testDescription": "Get the list of songs on a disk."
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    },
+    "/disks/4/songs": {
+      "post": {
+        "description": "Add a song to the disk.",
+        "summary": "AddDiskSong",
+        "tags": [
+          "Misc"
+        ],
+        "operationId": "Disks4SongsPost",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "requestCode",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": ""
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AddDiskSongRequest"
+            }
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [],
+        "x-unitTests": [
+          {
+            "request": {
+              "method": "POST",
+              "uri": "/disks/4/songs?requestCode=2231&token=salajane",
+              "headers": {
+                "Content-Type": "application/json"
+              },
+              "body": "{\"songId\":3,\"startTimeSeconds\":123,\"format\":\"ogg\"}"
+            },
+            "expectedResponse": {
+              "x-allowExtraHeaders": true,
+              "x-bodyMatchMode": "NONE",
+              "x-arrayOrderedMatching": false,
+              "x-arrayCheckCount": false,
+              "x-matchResponseSchema": true,
+              "headers": {}
+            },
+            "x-testShouldPass": true,
+            "x-testEnabled": true,
+            "x-testName": "AddDiskSong",
+            "x-testDescription": "Add a song to the disk."
+          }
+        ],
+        "x-operation-settings": {
+          "CollectParameters": false,
+          "AllowDynamicQueryParameters": false,
+          "AllowDynamicFormParameters": false,
+          "IsMultiContentStreaming": false
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddSongRequest": {
+      "title": "AddSongRequest",
+      "example": {
+        "id": 1,
+        "name": "Sing Me To Sleep",
+        "author": "Alan Walker",
+        "lengthSeconds": 183
+      },
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "",
+          "example": 1,
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "description": "",
+          "example": "Sing Me To Sleep",
+          "type": "string"
+        },
+        "author": {
+          "description": "",
+          "example": "Alan Walker",
+          "type": "string"
+        },
+        "lengthSeconds": {
+          "description": "",
+          "example": 183,
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "author",
+        "lengthSeconds"
+      ]
+    },
+    "AddDiskRequest": {
+      "title": "AddDiskRequest",
+      "example": {
+        "name": "MySecondDisk",
+        "author": "You"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "",
+          "example": "MySecondDisk",
+          "type": "string"
+        },
+        "author": {
+          "description": "",
+          "example": "You",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "author"
+      ]
+    },
+    "AddDiskSongRequest": {
+      "title": "AddDiskSongRequest",
+      "example": {
+        "songId": 3,
+        "startTimeSeconds": 123,
+        "format": "ogg"
+      },
+      "type": "object",
+      "properties": {
+        "songId": {
+          "description": "",
+          "example": 3,
+          "type": "integer",
+          "format": "int32"
+        },
+        "startTimeSeconds": {
+          "description": "",
+          "example": 123,
+          "type": "integer",
+          "format": "int32"
+        },
+        "format": {
+          "description": "",
+          "example": "ogg",
+          "type": "string"
+        }
+      },
+      "required": [
+        "songId",
+        "startTimeSeconds",
+        "format"
+      ]
+    }
+  }
+}
